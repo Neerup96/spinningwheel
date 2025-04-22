@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spinning Wheel</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f5f5f5;
+      font-family: sans-serif;
+    }
+
+    #wheel {
+      width: 300px;
+      height: 300px;
+      border: 10px solid #444;
+      border-radius: 50%;
+      background: conic-gradient(red 0% 25%, yellow 25% 50%, green 50% 75%, blue 75% 100%);
+      transition: transform 3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    #spinButton {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid #333;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    #popup img {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="wheel"></div>
+  <button id="spinButton">Spin the Wheel</button>
+
+  <div id="popup">
+    <p>🎉 Surprise! You spun 10 times!</p>
+    <img src="your-image.png" alt="Popup Image" />
+  </div>
+
+  <script>
+    const wheel = document.getElementById("wheel");
+    const button = document.getElementById("spinButton");
+    const popup = document.getElementById("popup");
+    let totalSpins = 0;
+    let currentRotation = 0;
+
+    button.addEventListener("click", () => {
+      const spinDegrees = Math.floor(Math.random() * 360) + 720; // 2+ full spins
+      currentRotation += spinDegrees;
+      wheel.style.transform = `rotate(${currentRotation}deg)`;
+      totalSpins++;
+
+      if (totalSpins === 10) {
+        setTimeout(() => {
+          popup.style.display = "block";
+        }, 3100); // Show popup *after* spin ends
+      }
+    });
+  </script>
+
+</body>
+</html>
