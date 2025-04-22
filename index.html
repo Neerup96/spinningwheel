@@ -20,7 +20,12 @@
       height: 300px;
       border: 10px solid #444;
       border-radius: 50%;
-      background: conic-gradient(red 0% 25%, yellow 25% 50%, green 50% 75%, blue 75% 100%);
+      background: conic-gradient(
+        red 0% 25%, 
+        yellow 25% 50%, 
+        green 50% 75%, 
+        blue 75% 100%
+      );
       transition: transform 3s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
@@ -41,10 +46,12 @@
       border: 2px solid #333;
       padding: 20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      text-align: center;
     }
 
     #popup img {
       width: 200px;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -54,7 +61,7 @@
   <button id="spinButton">Spin the Wheel</button>
 
   <div id="popup">
-    <p>🎉 Surprise! You spun 10 times!</p>
+    <p>🎉 You've spun 10 times!</p>
     <img src="picture.png" alt="Popup Image" />
   </div>
 
@@ -66,7 +73,7 @@
     let currentRotation = 0;
 
     button.addEventListener("click", () => {
-      const spinDegrees = Math.floor(Math.random() * 360) + 720; // 2+ full spins
+      const spinDegrees = Math.floor(Math.random() * 360) + 720;
       currentRotation += spinDegrees;
       wheel.style.transform = `rotate(${currentRotation}deg)`;
       totalSpins++;
@@ -74,7 +81,7 @@
       if (totalSpins === 10) {
         setTimeout(() => {
           popup.style.display = "block";
-        }, 3100); // Show popup *after* spin ends
+        }, 3100); // Show popup after wheel stops
       }
     });
   </script>
